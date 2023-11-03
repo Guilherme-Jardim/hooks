@@ -1,6 +1,8 @@
 'use client';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { GLabel } from "../components/GLabel";
+import { GButtonLogin } from "../components/GButtonLogin";
+import Link from "next/link";
 
 export default function Home() {
   const inputPasswordRef = useRef<HTMLInputElement>(null);
@@ -53,12 +55,9 @@ export default function Home() {
           ref={inputPasswordRef}
           onChange={newValue => setPassword(newValue)}
         />
-        <button
-          type="button"
-          onClick={handleEntrar}
-        >
-          Entrar
-        </button>
+        <Link href="/dashboard">
+          <GButtonLogin text="Login" />
+        </Link>
       </form>
     </div>
   )

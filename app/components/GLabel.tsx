@@ -1,4 +1,5 @@
 'use client';
+import { forwardRef } from 'react';
 interface GLabelProps {
   text: string;
   title: string;
@@ -6,29 +7,26 @@ interface GLabelProps {
   onPressEnter?: () => void;
   type: string;
   value: string;
-  ref?: React.RefObject<HTMLInputElement>;
 }
 
 
-export function GLabel({ text, title, onChange, onPressEnter, type, value, ref }: GLabelProps) {
+export const GLabel = forwardRef(function GLabel({ text, title, onChange, onPressEnter, type, value }: GLabelProps, ref?: React.Ref<HTMLInputElement>) {
   return (
-    <>
-      <label>
-        <p>
-          {text}
-        </p>
-        <span>
-          {title}
-        </span>
-        <input
-          onKeyDown={e => e.key === 'Enter' ? onPressEnter && onPressEnter() : undefined}
+    <label>
+      <p>
+        {text}
+      </p>
+      <span>
+        {title}
+      </span>
+      <input
+        onKeyDown={e => e.key === 'Enter' ? onPressEnter && onPressEnter?.() : undefined}
 
-          value={value}
-          onChange={e => onChange(e.target.value)}
-          type={type}
-          ref={ref}
-        />
-      </label>
-    </>
+        value={value}
+        onChange={e => onChange(e.target.value)}
+        type={type}
+        ref={ref}
+      />
+    </label>
   );
-}
+});
